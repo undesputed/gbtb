@@ -1,9 +1,12 @@
 import type React from "react"
-import "@/app/globals.css"
-import { Inter } from "next/font/google"
+import "./globals.css"
+import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+export const metadata: Metadata = {
+  title: "Gardens by the Bay",
+  description: "Explore the wonders of Gardens by the Bay in Singapore",
+}
 
 export default function RootLayout({
   children,
@@ -12,12 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <title>Gardens by the Bay</title>
-        <meta name="description" content="Explore the wonders of Gardens by the Bay in Singapore" />
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+      <body className="min-h-screen bg-background font-sans antialiased">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>

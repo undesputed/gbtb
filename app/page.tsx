@@ -1,262 +1,344 @@
-import Image from "next/image"
-import { gardens } from "@/data/gardens"
+"use client";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Info } from "@/components/Info";
+import { Fees } from "@/components/Fees";
+import { Map } from "@/components/Map";
+import { gardens } from "@/data/gardens";
+import { Button } from "@/components/ui/button";
+import {
+  ChevronRight,
+  Leaf,
+  MapPin,
+  Clock,
+  Ticket,
+  Menu,
+  X,
+  Instagram,
+  Facebook,
+  Twitter,
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import AboutSection from "./about-section";
+import AttractionsSection from "./attraction-section";
+import TicketsSection from "./ticket-section";
+import EventsSection from "./events-section";
+
+
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 z-40 border-b bg-white">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image src="/images/logo.png" alt="Gardens by the Bay Logo" width={40} height={40} className="rounded-md" />
-            <h1 className="text-xl font-bold m-0">Gardens by the Bay</h1>
+    <div className="flex min-h-screen flex-col bg-white text-gray-900">
+      <header
+        className={`sticky top-0 z-40 garden-header text-white transition-all duration-300 ${
+          scrolled ? "shadow-lg py-2" : "py-4"
+        }`}
+      >
+        <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 md:px-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-white p-1 rounded-full shadow-md transform hover:scale-105 transition-transform">
+              <Image
+                src="/images/logo.jpg"
+                alt="Gardens by the Bay Logo"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            </div>
+            <h1 className="text-xl font-bold">Gardens by the Bay</h1>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#about" className="transition-colors hover:text-primary-600">
+            <a
+              href="#about"
+              className="transition-colors hover:text-garden-light font-medium relative nav-link"
+            >
               About
             </a>
-            <a href="#attractions" className="transition-colors hover:text-primary-600">
+            <a
+              href="#attractions"
+              className="transition-colors hover:text-garden-light font-medium relative nav-link"
+            >
               Attractions
             </a>
-            <a href="#tickets" className="transition-colors hover:text-primary-600">
+            <a
+              href="#tickets"
+              className="transition-colors hover:text-garden-light font-medium relative nav-link"
+            >
               Tickets
             </a>
-            <a href="#location" className="transition-colors hover:text-primary-600">
+            <a
+              href="#location"
+              className="transition-colors hover:text-garden-light font-medium relative nav-link"
+            >
               Location
             </a>
+            <Button className="bg-white text-garden-primary hover:bg-garden-light hover:text-white transition-colors shadow-md">
+              Book Now
+            </Button>
           </nav>
+          <button
+            className="md:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed top-16 left-0 right-0 bg-garden-primary p-4 shadow-lg z-50 animate-fadeIn">
+            <nav className="flex flex-col space-y-4">
+              <a
+                href="#about"
+                className="text-white hover:text-garden-light font-medium py-2 px-4 rounded hover:bg-garden-primary/80 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </a>
+              <a
+                href="#attractions"
+                className="text-white hover:text-garden-light font-medium py-2 px-4 rounded hover:bg-garden-primary/80 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Attractions
+              </a>
+              <a
+                href="#tickets"
+                className="text-white hover:text-garden-light font-medium py-2 px-4 rounded hover:bg-garden-primary/80 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Tickets
+              </a>
+              <a
+                href="#location"
+                className="text-white hover:text-garden-light font-medium py-2 px-4 rounded hover:bg-garden-primary/80 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Location
+              </a>
+              <Button
+                className="bg-white text-garden-primary hover:bg-garden-light hover:text-white w-full transition-colors shadow-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Book Now
+              </Button>
+            </nav>
+          </div>
+        )}
       </header>
-
-      <main>
-        <section className="hero bg-cover bg-center" style={{ backgroundImage: "url('/images/floral-fantasy.jpg')" }}>
-          <div className="hero-overlay"></div>
-          <div className="hero-content container">
-            <div className="max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Gardens by the Bay</h1>
-              <p className="text-lg md:text-xl bg-black/30 p-2 rounded-md max-w-2xl mx-auto">{gardens.tagline}</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="section">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl">About Gardens by the Bay</h2>
-              <p className="text-gray-600 mt-4">{gardens.description}</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <div>
-                <h3 className="text-2xl font-bold text-primary-700">History</h3>
-                <p className="text-gray-600">{gardens.history}</p>
-              </div>
-
-              <div className="card">
-                <div className="card-header">
-                  <div className="card-title">Opening Hours</div>
-                  <div className="card-description">Plan your visit</div>
-                </div>
-                <div className="card-content">
-                  <div className="space-y-3">
-                    {gardens.openingHours.map((item, index) => (
-                      <div key={index} className="flex justify-between">
-                        <span className="font-medium">{item.area}</span>
-                        <span>{item.hours}</span>
-                      </div>
-                    ))}
-                  </div>
+      <main className="flex-1">
+        <section className="w-full py-24 md:py-32 lg:py-40 hero-section bg-[url('/images/flower-dome.jpg')] bg-cover bg-center">
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-6 text-center text-white">
+              <div className="space-y-4">
+                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none animate-float drop-shadow-lg">
+                  Gardens by the Bay
+                </h1>
+                <p className="mx-auto max-w-[700px] text-xl md:text-2xl bg-black/30 p-3 rounded-lg backdrop-blur-sm animate-fadeIn">
+                  Where Wonder Blooms in the Garden City
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 pt-4">
+                  <Button
+                    size="lg"
+                    className="bg-garden-primary hover:bg-garden-dark text-white shadow-lg transform hover:scale-105 transition-all"
+                  >
+                    Explore Now <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="bg-white/20 backdrop-blur-sm border-white text-white hover:bg-white hover:text-garden-primary shadow-lg transform hover:scale-105 transition-all"
+                  >
+                    Watch Video
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
+          <div className="absolute -bottom-40 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
         </section>
 
-        <section id="attractions" className="section section-alt">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl">Main Attractions</h2>
-              <p className="text-gray-600 mt-4">Discover the wonders of Gardens by the Bay</p>
-            </div>
+        <AboutSection />
+        <AttractionsSection gardens={gardens}/>
+        <TicketsSection/>
+        <EventsSection/>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {gardens.attractions.map((attraction, index) => (
-                <div key={index} className="attraction-card">
-                  <Image
-                    src={attraction.image || "/placeholder.svg?height=300&width=400&query=garden"}
-                    alt={attraction.name}
-                    width={400}
-                    height={300}
-                    className="attraction-image"
-                  />
-                  <div className="attraction-content">
-                    <div className="attraction-title">{attraction.name}</div>
-                    <div className="attraction-description">{attraction.shortDescription}</div>
-                  </div>
+        <section
+          id="location"
+          className="w-full py-16 md:py-24 lg:py-32 bg-night-gradient text-white relative"
+        >
+          <div className="container mx-auto max-w-7xl px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-flex items-center justify-center p-2 bg-white/10 rounded-full mb-4 animate-pulse">
+                  <MapPin className="h-6 w-6 text-white" />
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="tickets" className="section">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl">Tickets & Fees</h2>
-              <p className="text-gray-600 mt-4">Plan your visit with our ticket options</p>
-            </div>
-
-            <div className="table-container max-w-4xl mx-auto">
-              <table className="table">
-                <caption>Ticket prices are in Singapore Dollars (SGD)</caption>
-                <thead>
-                  <tr>
-                    <th>Ticket Type</th>
-                    <th>Local Resident</th>
-                    <th>Standard</th>
-                    <th>Child (3-12 years)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {gardens.tickets.map((ticket) => (
-                    <tr key={ticket.type}>
-                      <td className="font-medium">{ticket.type}</td>
-                      <td>${ticket.localResident.toFixed(2)}</td>
-                      <td>${ticket.standard.toFixed(2)}</td>
-                      <td>${ticket.child.toFixed(2)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <section id="location" className="section section-alt">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl md:text-4xl">Location & Information</h2>
-              <p className="text-gray-600 mt-4">Find us and learn more about our facilities</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <div className="card">
-                <div className="card-header">
-                  <div className="card-title">Garden Information</div>
-                  <div className="card-description">Key details about Gardens by the Bay</div>
-                </div>
-                <div className="card-content">
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="font-semibold text-base">Address</h3>
-                      <p className="text-sm text-gray-600">{gardens.location.address}</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-base">Contact</h3>
-                      <p className="text-sm text-gray-600">Phone: {gardens.contact.phone}</p>
-                      <p className="text-sm text-gray-600">Email: {gardens.contact.email}</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-base">Features</h3>
-                      <ul className="space-y-1 text-sm text-gray-600">
-                        {gardens.features.map((feature, index) => (
-                          <li key={index} className="flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-base">Accessibility</h3>
-                      <ul className="space-y-1 text-sm text-gray-600">
-                        {gardens.accessibility.map((item, index) => (
-                          <li key={index} className="flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-primary-500"></span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card">
-                <div className="card-header">
-                  <div className="card-title">Find Us</div>
-                  <div className="card-description">Gardens by the Bay location</div>
-                </div>
-                <div className="p-0">
-                  <div className="aspect-video w-full">
-                    <iframe
-                      src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(gardens.location.address)}&zoom=15`}
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Gardens by the Bay Map"
-                    ></iframe>
-                  </div>
-                </div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl section-title">
+                  Location & Information
+                </h2>
+                <p className="mx-auto max-w-[900px] text-white/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-8">
+                  Find us and learn more about our facilities
+                </p>
               </div>
             </div>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 md:grid-cols-1 lg:grid-cols-2 w-full lg:gap-12">
+              <Info />
+              <Map />
+            </div>
           </div>
+          <div className="hidden md:block absolute left-0 top-1/4 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
         </section>
       </main>
-
-      <footer className="border-t bg-white py-12">
-        <div className="container">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Image
-                  src="/images/logo.png"
-                  alt="Gardens by the Bay Logo"
-                  width={30}
-                  height={30}
-                  className="rounded-md"
-                />
+      <footer className="bg-garden-dark text-black">
+        <div className="container mx-auto max-w-7xl py-12 px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-white p-1 rounded-full">
+                  <Image
+                    src="/images/logo.jpg"
+                    alt="Gardens by the Bay Logo"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
+                </div>
                 <span className="text-lg font-bold">Gardens by the Bay</span>
               </div>
-              <p className="text-sm text-gray-500">
-                © {new Date().getFullYear()} Gardens by the Bay. All rights reserved.
+              <p className="text-black/70 max-w-md">
+                Gardens by the Bay is a nature park spanning 101 hectares in the
+                Central Region of Singapore, adjacent to the Marina Reservoir.
               </p>
+              <div className="flex space-x-4 pt-2">
+                <a
+                  href="#"
+                  className="text-black/70 hover:text-white transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={20} />
+                </a>
+                <a
+                  href="#"
+                  className="text-black/70 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={20} />
+                </a>
+                <a
+                  href="#"
+                  className="text-black/70 hover:text-white transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter size={20} />
+                </a>
+              </div>
             </div>
 
-            <div>
-              <h3 className="font-semibold mb-4">Visit</h3>
-              <div className="space-y-2">
-                <a href="#about" className="block text-sm text-gray-500 hover:text-primary-600">
-                  About
+            <div className="space-y-4">
+              <h3 className="font-semibold text-garden-gold mb-2 border-b border-garden-gold/30 pb-2">
+                Visit
+              </h3>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="#about"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> About
                 </a>
-                <a href="#attractions" className="block text-sm text-gray-500 hover:text-primary-600">
-                  Attractions
+                <a
+                  href="#attractions"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Attractions
                 </a>
-                <a href="#tickets" className="block text-sm text-gray-500 hover:text-primary-600">
-                  Tickets
+                <a
+                  href="#tickets"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Tickets
                 </a>
               </div>
             </div>
 
-            <div>
-              <h3 className="font-semibold mb-4">Connect</h3>
-              <div className="space-y-2">
-                <a href="#" className="block text-sm text-gray-500 hover:text-primary-600">
-                  Facebook
+            <div className="space-y-4">
+              <h3 className="font-semibold text-garden-gold mb-2 border-b border-garden-gold/30 pb-2">
+                Connect
+              </h3>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="#"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Facebook
                 </a>
-                <a href="#" className="block text-sm text-gray-500 hover:text-primary-600">
-                  Instagram
+                <a
+                  href="#"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Instagram
                 </a>
-                <a href="#" className="block text-sm text-gray-500 hover:text-primary-600">
-                  Twitter
+                <a
+                  href="#"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Twitter
                 </a>
               </div>
             </div>
+
+            <div className="space-y-4">
+              <h3 className="font-semibold text-garden-gold mb-2 border-b border-garden-gold/30 pb-2">
+                Legal
+              </h3>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="#"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Privacy Policy
+                </a>
+                <a
+                  href="#"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Terms of Service
+                </a>
+                <a
+                  href="#"
+                  className="text-sm text-black/70 hover:text-white hover:underline transition-colors flex items-center"
+                >
+                  <ChevronRight size={14} className="mr-1" /> Cookie Policy
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-black/10 mt-8 pt-8 text-center md:text-left">
+            <p className="text-sm text-black/50">
+              © {new Date().getFullYear()} Gardens by the Bay. All rights
+              reserved.
+            </p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }

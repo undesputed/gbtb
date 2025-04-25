@@ -1,47 +1,53 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { gardens } from "@/data/gardens"
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key } from "react"
+import { Mail, Phone, Globe, Clock } from "lucide-react"
 
 export function Info() {
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Garden Information</CardTitle>
-        <CardDescription>Key details about Gardens by the Bay</CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid gap-2">
-          <h3 className="font-semibold">Address</h3>
-          <p className="text-sm text-muted-foreground">{gardens.location.address}</p>
+    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+      <h3 className="text-2xl font-bold mb-6 text-garden-gold">Contact Information</h3>
+      <div className="space-y-4">
+        <div className="flex items-start gap-3">
+          <Mail className="h-5 w-5 text-garden-gold mt-1" />
+          <div>
+            <p className="font-medium">Email</p>
+            <p className="text-white/80">feedback@gardensbythebay.com.sg</p>
+          </div>
         </div>
-        <div className="grid gap-2">
-          <h3 className="font-semibold">Contact</h3>
-          <p className="text-sm text-muted-foreground">Phone: {gardens.contact.phone}</p>
-          <p className="text-sm text-muted-foreground">Email: {gardens.contact.email}</p>
+        <div className="flex items-start gap-3">
+          <Phone className="h-5 w-5 text-garden-gold mt-1" />
+          <div>
+            <p className="font-medium">Phone</p>
+            <p className="text-white/80">+65 6420 6848</p>
+          </div>
         </div>
-        <div className="grid gap-2">
-          <h3 className="font-semibold">Features</h3>
-          <ul className="grid gap-1 text-sm text-muted-foreground">
-            {gardens.features.map((feature: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: Key | null | undefined) => (
-              <li key={index} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
-                {feature}
-              </li>
-            ))}
-          </ul>
+        <div className="flex items-start gap-3">
+          <Globe className="h-5 w-5 text-garden-gold mt-1" />
+          <div>
+            <p className="font-medium">Address</p>
+            <p className="text-white/80">18 Marina Gardens Drive, Singapore 018953</p>
+          </div>
         </div>
-        <div className="grid gap-2">
-          <h3 className="font-semibold">Accessibility</h3>
-          <ul className="grid gap-1 text-sm text-muted-foreground">
-            {gardens.accessibility.map((item: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: Key | null | undefined) => (
-              <li key={index} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
-                {item}
-              </li>
-            ))}
-          </ul>
+        <div className="flex items-start gap-3">
+          <Clock className="h-5 w-5 text-garden-gold mt-1" />
+          <div>
+            <p className="font-medium">Customer Service</p>
+            <p className="text-white/80">9:00 AM - 9:00 PM (Daily)</p>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+      <div className="mt-6 pt-6 border-t border-white/20">
+        <h4 className="font-medium mb-2">Getting Here</h4>
+        <div className="space-y-2 text-sm text-white/80">
+          <p>
+            <span className="text-garden-gold font-medium">MRT:</span> Bayfront Station (Circle Line & Downtown Line)
+          </p>
+          <p>
+            <span className="text-garden-gold font-medium">Bus:</span> Services 400, 402
+          </p>
+          <p>
+            <span className="text-garden-gold font-medium">Car:</span> Underground parking available
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }

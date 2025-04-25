@@ -1,0 +1,75 @@
+export const gardens = {
+  tagline: "Where Wonder Blooms in the Garden City",
+  description:
+    "Gardens by the Bay is a nature park spanning 101 hectares in the Central Region of Singapore, adjacent to the Marina Reservoir. The park consists of three waterfront gardens: Bay South Garden, Bay East Garden and Bay Central Garden.",
+  history:
+    "Gardens by the Bay was part of the nation's plans to transform its 'Garden City' to a 'City in a Garden'. The stated aim is to raise the quality of life by enhancing greenery and flora in the city. First announced by Prime Minister Lee Hsien Loong at the National Day Rally in 2005, Gardens by the Bay was intended to be Singapore's premier urban outdoor recreation space, and a national icon.",
+  openingHours: [
+    { area: "Outdoor Gardens", hours: "5:00 AM - 2:00 AM" },
+    { area: "Flower Dome", hours: "9:00 AM - 9:00 PM" },
+    { area: "Cloud Forest", hours: "9:00 AM - 9:00 PM" },
+    { area: "OCBC Skyway", hours: "9:00 AM - 9:00 PM" },
+    { area: "Floral Fantasy", hours: "10:00 AM - 7:00 PM" },
+  ],
+  attractions: [
+    {
+      name: "Supertree Grove",
+      shortDescription: "Iconic vertical gardens that come alive with a dazzling light and sound show at night.",
+      image: "/images/supertree-grove.jpg",
+      category: "nature",
+      isPopular: true,
+      location: "Gardens by the Bay",
+      hours: "9:00 AM - 9:00 PM",
+      fee: "Free",
+    },
+    {
+      name: "Cloud Forest",
+      shortDescription: "A mysterious world veiled in mist, showcasing plant life from tropical highlands.",
+      image: "/images/cloud-forest.png",
+      category: "indoors",
+      isPopular: true,
+      location: "Gardens by the Bay",
+      hours: "9:00 AM - 9:00 PM",
+      fee: "$20",
+    },
+    {
+      name: "Flower Dome",
+      shortDescription:
+        "A cool-dry conservatory displaying flowers and plants from the Mediterranean and semi-arid regions.",
+      image: "/images/flower-dome.jpg",
+      category: "indoors",
+      isPopular: true,
+      location: "Gardens by the Bay",
+      hours: "9:00 AM - 9:00 PM",
+      fee: "$20",
+    },
+    {
+      name: "OCBC Skyway",
+      shortDescription: "An aerial walkway offering panoramic views of the Gardens and the Marina Bay skyline.",
+      image: "/images/ocbc-skyway.jpg",
+      category: "views",
+      location: "Gardens by the Bay",
+      hours: "9:00 AM - 9:00 PM",
+      fee: "$8",
+    },
+    {
+      name: "Floral Fantasy",
+      shortDescription:
+        "A vibrant and whimsical display of floral artistry, featuring suspended bouquets and creative arrangements.",
+      image: "/images/floral-fantasy.jpg",
+      category: "indoors",
+      location: "Gardens by the Bay",
+      hours: "10:00 AM - 7:00 PM",
+      fee: "$20",
+    },
+    {
+      name: "Art Sculptures",
+      shortDescription: "Discover the various art sculptures dotted around the gardens.",
+      image: "/images/perpetual-blooms.jpg",
+      category: "art",
+      location: "Gardens by the Bay",
+      hours: "Open 24 hours",
+      fee: "Free",
+    },
+  ],
+}
