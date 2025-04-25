@@ -18,8 +18,15 @@ A responsive, statically exported Next.js site showcasing Gardens by the Bay in 
 - Package manager: npm, Yarn or pnpm  
 
 ### Installation
-
 ```bash
 git clone https://github.com/yourusername/gardens-by-the-bay.git
 cd gardens-by-the-bay
 npm install        # or yarn / pnpm install
+```
+
+> If `npm install` fails due to peer-dependency issues, run:
+```bash
+npm install --force
+# or
+npm install --legacy-peer-deps
+```
